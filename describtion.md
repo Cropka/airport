@@ -3,12 +3,12 @@
 
 #### Class agent with ability to communicate and take some orders from the supervisory control
 - plane : agent
-      - passangerPlane : plane
-      - postalPlane : plane
-      - avionette : plane
+    - passangerPlane : plane
+    - postalPlane : plane
+    - avionette : plane
 - car : agent
-      - bus : car
-      - stairsVehicle : car
+    - bus : car
+    - stairsVehicle : car
      
 
 
