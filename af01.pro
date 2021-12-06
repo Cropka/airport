@@ -15,19 +15,37 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
+    bus.cpp \
+    car.cpp \
+    mainwindow.cpp \
+    passangerplane.cpp \
+    plane.cpp \
+    postalplane.cpp \
+    rampstairs.cpp \
     resource.cpp \
     controller.cpp \
     event.cpp \
+    runway.cpp \
     simulator.cpp \
     gateway.cpp \
     agent.cpp \
     airport.cpp
 
 HEADERS += \
+    bus.h \
+    car.h \
+    mainwindow.h \
+    passangerplane.h \
+    plane.h \
+    postalplane.h \
+    rampstairs.h \
     resource.h \
     controller.h \
     event.h \
+    runway.h \
     simulator.h \
     gateway.h \
     agent.h \
     airport.h
+
+QT += widgets

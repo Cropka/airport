@@ -8,13 +8,14 @@
 
 //this class is a link from the backend to the GUI. GUI may take all of the coordinates and object types from here.
 //(fields positionX, positionY, type from classes agent and resource)
-class airport : public QObject
+class Airport : public QObject
 {
     Q_OBJECT
 public:
-    explicit airport(QObject *parent = nullptr);
-    std::vector<agent> agents; //vector of all agents
-    std::vector<resource> resources; //vector of all resources
+    std::vector<Agent> agents; //vector of all agents
+    std::vector<Resource> resources; //vector of all resources
+
+    explicit Airport(QObject *parent = nullptr);
 signals:
 
 public slots:

@@ -3,15 +3,13 @@
 
 #include "resource.h"
 
-class gateway : public resource
+class Gateway : public Resource
 {
-public:    
-    gateway(int _id, int _positionX, int _positionY): resource(nullptr) {
-        type="gateway";
-        positionX=_positionX;
-        positionY=_positionY;
-        id=_id;
-    }
+public:
+
+    explicit Gateway(int _id, QObject *parent = nullptr);
+    Gateway(int _id, float pos_x, float pos_y, QObject *parent = nullptr);
+    virtual std::string type() override { return std::string("gateway"); }
 };
 
 #endif // GATEWAY_H

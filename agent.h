@@ -2,19 +2,20 @@
 #define AGENT_H
 
 #include <QObject>
+#include <QPointF>
 
 //this class is for everything, which needs to be displayed, but cannot be classified as a resource. ex. planes.
-class agent : public QObject
+class Agent : public QObject
 {
+protected:
     Q_OBJECT
 public:
-    int id=-2;
-    //coordinates are needed by the GUI. They need to be given at the constructor of each subclass. Default: 0, 0.
-    float positionX=0.0;
-    float positionY=0.0;
-    explicit agent(QObject *parent = nullptr);
-    std::string type="empty_agent";//different for each inheriting class. Given at constructor.
+    int id;
+    QPointF position; //coordinates are needed by the GUI. They need to be given at the constructor of each subclass. Default: 0, 0.
 
+    explicit Agent(int _id, QObject *parent = nullptr);
+    Agent(int _id, float pos_x, float pos_y, QObject *parent);
+    virtual std::string type() = 0;
 signals:
 
 public slots:

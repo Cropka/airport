@@ -2,24 +2,24 @@
 #define RESOURCE_H
 
 #include <QObject>
+#include <QPointF>
 #include <string>
 
-class resource : public QObject
+class Resource : public QObject
 {
 protected:
     Q_OBJECT
 public:
-    int id=-1;
+    int id;
     bool busy;
-    //coordinates are needed by the GUI. They need to be given at the constructor of each subclass. Default: 0, 0.
-    float positionX=0.0;
-    float positionY=0.0;
-public:
-    explicit resource(QObject *parent = nullptr): QObject(parent), busy(false) {}
-    std::string type="empty_resource";//different for each inheriting class. Given at constructor.
-    bool isBusy(){
-        return busy;
-    }
+    QPointF position;
+
+    explicit Resource(int _id, QObject *parent = nullptr);
+    Resource(int _id, float pos_x, float pos_y, QObject *parent = nullptr);
+    explicit Resource(int _id, QPointF pos, QObject *parent = nullptr);
+    bool isBusy() { return busy; }
+    virtual std::string type() = 0;
+
 signals:
 //signal signaling outcome of isBusy method
 public slots:

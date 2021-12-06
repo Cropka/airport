@@ -6,20 +6,18 @@
 #include "resource.h"
 #include "agent.h"
 
-class event : public QObject
+class Event : public QObject
 {
 private:
     Q_OBJECT
 public:
-    explicit event(int _timeOfOccuring, std::vector<agent>* _agents, std::vector<resource>* _subeventsResources,
-                   std::vector<int> _subeventsLengths, std::vector<int> _subeventsDeadlines, std::vector<int> _subeventsPriorities,
-                   QObject *parent = nullptr);
+    explicit Event(int _timeOfOccuring, int _priority, std::vector<Agent>* _agents, std::vector<Resource>* _resources,
+                   std::vector<Event>* _subevents, QObject *parent = nullptr);
     int timeOfOccuring;
-    std::vector<resource>& subeventsResources; //resources needed for each of the subevents
-    std::vector<int> subeventsPriorities; //range <1,10>. 1 is highest, 10 lowest.
-    std::vector<int> subeventsLengths; //length in time for each of the subevents
-    std::vector<int> subeventsDeadlines;
-    std::vector<agent>& agents; //event may initialise some agents, that need to be displayed on a GUI
+    int priority;
+    std::vector<Resource>& resources;
+    std::vector<Agent>& agents; //event may initialise some agents, that need to be displayed on a GUI
+    std::vector<Event>& subevents;
 signals:
 
 public slots:
