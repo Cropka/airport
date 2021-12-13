@@ -9,43 +9,64 @@ CONFIG -= app_bundle
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+INCLUDEPATH += ./factory \
+    ./agents \
+    ./resources
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    bus.cpp \
-    car.cpp \
+    agents/agent.cpp \
+    agents/bus.cpp \
+    agents/car.cpp \
+    agents/passangerplane.cpp \
+    agents/plane.cpp \
+    agents/postalplane.cpp \
+    agents/rampstairs.cpp \
+    factory/agentfactory.cpp \
+    factory/busfactory.cpp \
+    factory/gatewayfactory.cpp \
+    factory/passengerplanefactory.cpp \
+    factory/postalplanefactory.cpp \
+    factory/rampstairsfactory.cpp \
+    factory/resourcefactory.cpp \
+    factory/runwayfactory.cpp \
     mainwindow.cpp \
-    passangerplane.cpp \
-    plane.cpp \
-    postalplane.cpp \
-    rampstairs.cpp \
-    resource.cpp \
+    presimulationmenu.cpp \
     controller.cpp \
     event.cpp \
-    runway.cpp \
+    resources/gateway.cpp \
+    resources/resource.cpp \
+    resources/runway.cpp \
     simulator.cpp \
-    gateway.cpp \
-    agent.cpp \
     airport.cpp
 
 HEADERS += \
-    bus.h \
-    car.h \
+    agents/agent.h \
+    agents/bus.h \
+    agents/car.h \
+    agents/passangerplane.h \
+    agents/plane.h \
+    agents/postalplane.h \
+    agents/rampstairs.h \
+    factory/agentfactory.h \
+    factory/busfactory.h \
+    factory/gatewayfactory.h \
+    factory/passengerplanefactory.h \
+    factory/postalplanefactory.h \
+    factory/rampstairsfactory.h \
+    factory/resourcefactory.h \
+    factory/runwayfactory.h \
     mainwindow.h \
-    passangerplane.h \
-    plane.h \
-    postalplane.h \
-    rampstairs.h \
-    resource.h \
+    presimulationmenu.h \
     controller.h \
     event.h \
-    runway.h \
+    resources/gateway.h \
+    resources/resource.h \
+    resources/runway.h \
     simulator.h \
-    gateway.h \
-    agent.h \
     airport.h
 
 QT += widgets

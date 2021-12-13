@@ -1,9 +1,9 @@
 #include "simulator.h"
 
-Simulator::Simulator(QObject *parent)
+Simulator::Simulator(Airport *_airport, QObject *parent)
     : QObject(parent)
 {
-
+    airport = _airport;
 }
 
 Simulator::~Simulator()
@@ -11,16 +11,41 @@ Simulator::~Simulator()
 
 }
 
-void Simulator::simulation1()
+void Simulator::startSimulation()
 {
-    PassangerPlane plane1(1);
-    PostalPlane plane2(1);
-    PostalPlane plane3(2);
-    PostalPlane plane4(3);
-    PassangerPlane plane5(2);
-    emit requestLanding(&plane3);
-    emit requestLanding(&plane1);
-    emit requestLanding(&plane4);
-    emit requestLanding(&plane2);
-    emit requestLanding(&plane5);
+    for (auto agent : airport->agents) {
+        if (agent->type() == "postal plane" || agent->type() == "passanger plane") {
+            emit requestLanding(agent);
+        }
+    }
+}
+
+void Simulator::addNewPassangerPlane()
+{
+    airport->addAgent(passanger_plane_factory.createAgent());
+}
+
+void Simulator::addNewPostalPlane()
+{
+    airport->addAgent(postal_plane_factory.createAgent());
+}
+
+void Simulator::addNewBus()
+{
+    airport->addAgent(bus_factory.createAgent());
+}
+
+void Simulator::addNewRampStairs()
+{
+    airport->addAgent(ramp_stairs_factory.createAgent());
+}
+
+void Simulator::addNewGateway()
+{
+    airport->addResource(gateway_factory.createResource());
+}
+
+void Simulator::addNewRunway()
+{
+    airport->addResource(runway_factory.createResource());
 }

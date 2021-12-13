@@ -2,15 +2,33 @@
 #define CONTROLLER_H
 
 #include <QObject>
-#include <agent.h>
+#include <queue>
+#include "agent.h"
+#include "airport.h"
+#include "event.h"
+
+
+class CompareEvents
+{
+public:
+    bool operator() (Event, Event);
+};
+
 
 class Controller : public QObject
 {
     Q_OBJECT
+
+    Airport *airport;
+    std::priority_queue<Event, std::vector<Event>, CompareEvents> event_queue;
 public:
-    explicit Controller(QObject *parent = nullptr);
+    explicit Controller(Airport *_airport, QObject *parent = nullptr);
+    virtual ~Controller();
+    int isResourceFree(std::string);
 
 public slots:
+    void acknowledgeNewAgent(Agent*);
+    void acknowledgeNewResource(Resource*);
     void landingRequested(Agent*);
 };
 

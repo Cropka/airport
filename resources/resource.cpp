@@ -13,8 +13,7 @@ Resource::Resource(int _id, float pos_x, float pos_y, QObject *parent)
 
 }
 
-Resource::Resource(int _id, QPointF pos, QObject *parent)
-    : QObject(parent), id(_id), busy(false), position(pos)
+Resource::Resource(int _id, QPointF _pos, QObject *parent)
+    : QObject(parent), id(_id), busy(false), position(_pos)
 {
-
 }

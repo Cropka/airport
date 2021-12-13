@@ -2,19 +2,19 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
 #include "controller.h"
 #include "simulator.h"
+#include "presimulationmenu.h"
 
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    Airport *airport;
     Simulator *simulator;
     Controller *controller;
-    QPushButton *start_sim1;
-
+    PreSimulationMenu *pre_sim_menu;
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow();

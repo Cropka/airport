@@ -12,13 +12,16 @@ class Airport : public QObject
 {
     Q_OBJECT
 public:
-    std::vector<Agent> agents; //vector of all agents
-    std::vector<Resource> resources; //vector of all resources
+    std::vector<Agent*> agents; //vector of all agents
+    std::vector<Resource*> resources; //vector of all resources
 
     explicit Airport(QObject *parent = nullptr);
 signals:
-
+    void notifyNewAgentAdded(Agent*);
+    void notifyNewResourceAdded(Resource*);
 public slots:
+    void addAgent(Agent*);
+    void addResource(Resource*);
 //here need to appear some slots to add new agents/resources and to change their current positions.
 };
 
