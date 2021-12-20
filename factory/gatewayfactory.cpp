@@ -8,6 +8,7 @@ GatewayFactory::GatewayFactory(QObject *parent)
 
 Gateway *GatewayFactory::createResource()
 {
+    std::cerr<<"New gateway created!"<<std::endl;
     return new Gateway(++counter);
 }
 

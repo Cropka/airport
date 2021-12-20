@@ -41,7 +41,8 @@ SOURCES += main.cpp \
     resources/resource.cpp \
     resources/runway.cpp \
     simulator.cpp \
-    airport.cpp
+    airport.cpp \
+    configparser.cpp
 
 HEADERS += \
     agents/agent.h \
@@ -67,6 +68,7 @@ HEADERS += \
     resources/resource.h \
     resources/runway.h \
     simulator.h \
-    airport.h
+    airport.h \
+    configparser.h
 
 QT += widgets

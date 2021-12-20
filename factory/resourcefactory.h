@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "resource.h"
+#include <iostream>
 
 class ResourceFactory : public QObject
 {

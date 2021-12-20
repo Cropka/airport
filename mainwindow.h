@@ -15,6 +15,7 @@ class MainWindow : public QMainWindow
     Simulator *simulator;
     Controller *controller;
     PreSimulationMenu *pre_sim_menu;
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow();

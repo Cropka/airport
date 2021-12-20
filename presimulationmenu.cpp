@@ -12,6 +12,7 @@ PreSimulationMenu::PreSimulationMenu(QWidget *parent)
     add_gateway_button = new QPushButton("Add gateway", this);
     add_ramp_stairs_button = new QPushButton("Add ramp stairs", this);
     add_bus_button = new QPushButton("Add new bus", this);
+    read_config_file_button = new QPushButton("Read from config file", this);
 
     menu_layout->addWidget(start_sim_button, 4, 3);
     menu_layout->addWidget(add_passanger_plane_button, 1, 2);
@@ -20,6 +21,7 @@ PreSimulationMenu::PreSimulationMenu(QWidget *parent)
     menu_layout->addWidget(add_bus_button, 2, 2);
     menu_layout->addWidget(add_runway_button, 3, 2);
     menu_layout->addWidget(add_gateway_button, 3, 3);
+    menu_layout->addWidget(read_config_file_button, 4, 2);
 
     menu_layout->addItem(spacer, 1, 1, 4, 1);
     menu_layout->addItem(spacer, 1, 5, 4, 1);
@@ -35,4 +37,5 @@ void PreSimulationMenu::connectButtons(Simulator* simulator)
     QObject::connect(add_gateway_button, &QPushButton::clicked, simulator, &Simulator::addNewGateway);
     QObject::connect(add_runway_button, &QPushButton::clicked, simulator, &Simulator::addNewRunway);
     QObject::connect(start_sim_button, &QPushButton::clicked, simulator, &Simulator::startSimulation);
+    QObject::connect(read_config_file_button, &QPushButton::clicked, simulator, &Simulator::readConfigFile);
 }

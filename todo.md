@@ -24,6 +24,8 @@ Fields: it need to have some vector of events to perform, events which are curre
 
 #### V2
 * make simulator read test configuration from file
+	- Done - added class ConfigParser. Description of the config file is in the header.
+	- For now, filename is hardcoded as the "filename" field of simulator class. It should be read from the GUI.
 * make simulator handle determining events timeOfOccurance (randomly?)
 * add more events for handling within simulator & controller
 * add rest of agents and resources (if needed, perhaps for now we can work with this basis)

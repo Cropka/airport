@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "agent.h"
+#include <iostream>
 
 class AgentFactory : public QObject
 {

@@ -8,6 +8,7 @@ PassengerPlaneFactory::PassengerPlaneFactory(QObject *parent)
 
 PassangerPlane *PassengerPlaneFactory::createAgent()
 {
+    std::cerr<<"New passanger plane created!"<<std::endl;
     return new PassangerPlane(++counter);
 }
 

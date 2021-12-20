@@ -18,6 +18,7 @@ class PreSimulationMenu : public QWidget
     QPushButton *add_gateway_button;
     QPushButton *add_ramp_stairs_button;
     QPushButton *add_bus_button;
+    QPushButton *read_config_file_button;
     QSpacerItem *spacer;
 
 public:

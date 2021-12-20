@@ -8,6 +8,7 @@ PostalPlaneFactory::PostalPlaneFactory(QObject *parent)
 
 PostalPlane *PostalPlaneFactory::createAgent()
 {
+    std::cerr<<"New postal plane created!"<<std::endl;
     return new PostalPlane(++counter);
 }
 

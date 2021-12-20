@@ -1,0 +1,10 @@
+//that is the comment
+#define plane command_plane
+
+/*block comments
+  should also work!*/
+
+bus 30 100 
+bus 40 -230
+gateway 0 0
+plane 40 0

@@ -8,6 +8,7 @@ RunwayFactory::RunwayFactory(QObject *parent)
 
 Runway *RunwayFactory::createResource()
 {
+    std::cerr<<"New runway created!"<<std::endl;
     return new Runway(++counter);
 }
 

@@ -8,6 +8,7 @@ BusFactory::BusFactory(QObject *parent)
 
 Bus *BusFactory::createAgent()
 {
+    std::cerr<<"New bus created!"<<std::endl;
     return new Bus(++counter);
 }
 

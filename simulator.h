@@ -11,6 +11,7 @@
 #include "rampstairsfactory.h"
 #include "gatewayfactory.h"
 #include "runwayfactory.h"
+#include "configparser.h"
 
 /**
  * @brief The simulator class
@@ -22,13 +23,16 @@
 class Simulator : public QObject
 {
     Q_OBJECT
+    std::string filename="config_file";
     Airport *airport;
+    ConfigParser *config;
     PassengerPlaneFactory passanger_plane_factory;
     PostalPlaneFactory postal_plane_factory;
     BusFactory bus_factory;
     RampStairsFactory ramp_stairs_factory;
     GatewayFactory gateway_factory;
     RunwayFactory runway_factory;
+    void connectParser();//just some signals-slots connection definitions
 
 public:
     explicit Simulator(Airport *_airport, QObject *parent = nullptr);
@@ -38,6 +42,7 @@ signals:
     void requestLanding(Agent*);
 
 public slots:
+    void readConfigFile();//the filename should be read from GUI. For now its hardcoded (but it should probably change).
     void startSimulation();
     void addNewPassangerPlane();
     void addNewPostalPlane();
