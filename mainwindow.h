@@ -14,7 +14,6 @@
 #include <QTimer>
 #include <QGraphicsItem>
 #include <QGraphicsItemAnimation>
-#include <animation.h>
 #include <QTimeLine>
 
 QT_BEGIN_NAMESPACE
@@ -36,6 +35,7 @@ public:
     QGraphicsItem *plane3;
     QGraphicsItem *airport;
 
+    QPushButton *arrive1 = new QPushButton(this);
     QPixmap *airport_pic = new QPixmap("/home/laxin/Pictures/correct_airport_pop.png");
     QPixmap *plane_pic = new QPixmap("/home/laxin/Pictures/plane.png");
 
@@ -64,7 +64,6 @@ public:
     int waypoint_4_x = 1091;
     int plane_4_ang = 0;
 
-
     QTimer *clock1 = new QTimer(this);
     QTimer *clock2 = new QTimer(this);
     QTimer *clock3 = new QTimer(this);
@@ -92,9 +91,6 @@ public slots:
 
     void move_to_second();
     void move1();
-
-
-
 
 };
 #endif // MAINWINDOW_H

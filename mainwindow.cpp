@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     gui_object->setGeometry(20, 10, 1441, 891);
+    arrive1->setGeometry(1300, 850, 100,40);
     //Adding items to scene and taking back the handles
     gui_object->setScene(scene);
     gui_object->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -50,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //connect(clock1, SIGNAL(timeout()), this, SLOT(arrive_place_1()));
 
-    //connect(ui->arrive1, SIGNAL(clicked()), this, SLOT(move1()));
+    connect(arrive1, SIGNAL(clicked()), this, SLOT(move1()));
     //connect(ui->arrive2, SIGNAL(clicked()), this, SLOT(move_to_second()));
 
     connect(clock1, SIGNAL(timeout()), this, SLOT(move1()));
