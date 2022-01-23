@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+//#include "ui_mainwindow.h"
 
 #include <QDebug>
 #include <QPixmap>
@@ -12,12 +12,13 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
 
+{
+    gui_object->setGeometry(20, 10, 1441, 891);
     //Adding items to scene and taking back the handles
-    ui->graphicsView->setScene(scene);
+    gui_object->setScene(scene);
+    gui_object->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    gui_object->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     airport =   scene->addPixmap(*airport_pic);
     plane   =   scene->addPixmap(*plane_pic);
@@ -49,8 +50,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     //connect(clock1, SIGNAL(timeout()), this, SLOT(arrive_place_1()));
 
-    connect(ui->arrive1, SIGNAL(clicked()), this, SLOT(move1()));
-    connect(ui->arrive2, SIGNAL(clicked()), this, SLOT(move_to_second()));
+    //connect(ui->arrive1, SIGNAL(clicked()), this, SLOT(move1()));
+    //connect(ui->arrive2, SIGNAL(clicked()), this, SLOT(move_to_second()));
 
     connect(clock1, SIGNAL(timeout()), this, SLOT(move1()));
     connect(clock2, SIGNAL(timeout()), this, SLOT(move_to_second()));
@@ -63,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 
     delete plane;
     delete plane1;

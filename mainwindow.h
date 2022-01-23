@@ -29,9 +29,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
-    Ui::MainWindow *ui;
-
+    QGraphicsView* gui_object = new QGraphicsView(this);
     QGraphicsItem *plane;
     QGraphicsItem *plane1;
     QGraphicsItem *plane2;

@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainWindow w;
-    //w.setMaximumSize(900, 900);
+    w.setFixedSize(1650, 950);
     w.show();
     return a.exec();
 }
