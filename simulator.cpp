@@ -16,7 +16,7 @@ Simulator::~Simulator()
 void Simulator::startSimulation()
 {
     for (auto agent : airport->agents) {
-        if (agent->type() == "postal plane" || agent->type() == "passanger plane") {
+        if (agent->agent_type() == "postal plane" || agent->agent_type() == "passanger plane") {
             emit requestLanding(agent);
         }
     }
@@ -31,36 +31,36 @@ void Simulator::connectParser(){
     QObject::connect(config, &ConfigParser::createRunway, this, &Simulator::addNewRunway);
 }
 
-void Simulator::readConfigFile(){
+void Simulator::readConfigFile(std::string filename){
     config->readObjects(filename);//should be changed! It should be taken from the user input!
 }
 
-void Simulator::addNewPassangerPlane()
+void Simulator::addNewPassangerPlane(int place)
 {
-    airport->addAgent(passanger_plane_factory.createAgent());
+    airport->addAgent(passanger_plane_factory.createAgent(), place);
 }
 
-void Simulator::addNewPostalPlane()
+void Simulator::addNewPostalPlane(int place)
 {
-    airport->addAgent(postal_plane_factory.createAgent());
+    airport->addAgent(postal_plane_factory.createAgent(), place);
 }
 
-void Simulator::addNewBus()
+void Simulator::addNewBus(int place)
 {
-    airport->addAgent(bus_factory.createAgent());
+    airport->addAgent(bus_factory.createAgent(), place);
 }
 
-void Simulator::addNewRampStairs()
+void Simulator::addNewRampStairs(int place)
 {
-    airport->addAgent(ramp_stairs_factory.createAgent());
+    airport->addAgent(ramp_stairs_factory.createAgent(), place);
 }
 
-void Simulator::addNewGateway()
+void Simulator::addNewGateway(int place)
 {
-    airport->addResource(gateway_factory.createResource());
+    airport->addResource(gateway_factory.createResource(), place);
 }
 
-void Simulator::addNewRunway()
+void Simulator::addNewRunway(int place)
 {
-    airport->addResource(runway_factory.createResource());
+    airport->addResource(runway_factory.createResource(), place);
 }

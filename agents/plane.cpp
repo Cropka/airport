@@ -4,13 +4,15 @@
 Plane::Plane(int _id, QObject *parent)
     : Agent(_id, parent)
 {
-    std::cout<<"TEST"<<std::endl;
-
+    image = QPixmap(":/images/plane.png");
+    setRotation(0);
+    setScale(0.025);
 }
 
 Plane::Plane(int _id, float pos_x, float pos_y, QObject *parent)
     : Agent(_id, pos_x, pos_y, parent)
 {
-    std::cout<<"TEST1"<<std::endl;
-
+    image = QPixmap(":/images/plane.png");
+    setRotation(0);
+    setScale(0.025);
 }

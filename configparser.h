@@ -33,14 +33,14 @@ public:
     ConfigParser(Airport *_airport, QObject *parent = nullptr);
     bool readObjects(std::string _filename);
     bool preprocess(std::istringstream& _iStream, std::string _filename);
-    void emitSignal(std::string _indicator);
+    void emitSignal(std::string _indicator, std::string _place);
 signals:
-    void createPostalPlane();
-    void createPassangerPlane();
-    void createRampstairs();
-    void createBus();
-    void createGateway();
-    void createRunway();
+    void createPostalPlane(int);
+    void createPassangerPlane(int);
+    void createRampstairs(int);
+    void createBus(int);
+    void createGateway(int);
+    void createRunway(int);
 };
 
 #endif // CONFIGPARSER_H

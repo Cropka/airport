@@ -37,7 +37,9 @@ void Controller::landingRequested(Agent* agent)
 {
     Event *event = new Event(0, 0, nullptr, nullptr, nullptr);
     event_queue.push(*event);
-    std::cout << "Received event: Plane landing; plane type: " << agent->type() << "; plane id: " << agent->id << std::endl;
+    std::cerr << "Received event: Plane landing; plane type: " << agent->agent_type() << "; plane id: " << agent->id << std::endl;
+    agent->setPos(467, 1000);
+    airport->arrive_place_2(agent);
 }
 
 bool CompareEvents::operator()(Event e1, Event e2)

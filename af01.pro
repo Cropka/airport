@@ -34,7 +34,6 @@ SOURCES += main.cpp \
     factory/resourcefactory.cpp \
     factory/runwayfactory.cpp \
     mainwindow.cpp \
-    presimulationmenu.cpp \
     controller.cpp \
     event.cpp \
     resources/gateway.cpp \
@@ -61,7 +60,6 @@ HEADERS += \
     factory/resourcefactory.h \
     factory/runwayfactory.h \
     mainwindow.h \
-    presimulationmenu.h \
     controller.h \
     event.h \
     resources/gateway.h \
@@ -72,3 +70,6 @@ HEADERS += \
     configparser.h
 
 QT += widgets
+
+RESOURCES += \
+    images.qrc

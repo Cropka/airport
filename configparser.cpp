@@ -30,11 +30,11 @@ bool ConfigParser::readObjects(std::string filename){
     bool found;
 
     for(unsigned int i=0;i<words.size();++i){
-        if(i%3==0){
+        if(i%2==0){
             found=false;
             for(std::string keyword : keywords){
                 if(words[i]==keyword) {
-                    emitSignal(keyword);
+                    emitSignal(keyword, words[i+1]);
                     found=true;
                 }
             }
@@ -64,25 +64,26 @@ bool ConfigParser::preprocess(std::istringstream& _iStream, std::string _filenam
     return pclose(pProc) == 0;
 }
 
-void ConfigParser::emitSignal(std::string _indicator){
+void ConfigParser::emitSignal(std::string _indicator, std::string _place){
+    int place = std::stoi(_place);
     //{"postalplane", "passengerplane", "rampstairs", "bus", "gateway", "runway"}
     if(_indicator=="postalplane"){
-        emit createPostalPlane();
+        emit createPostalPlane(place);
     }
     else if(_indicator=="passengerplane"){
-        emit createPassangerPlane();
+        emit createPassangerPlane(place);
     }
     else if(_indicator=="rampstairs"){
-        emit createRampstairs();
+        emit createRampstairs(place);
     }
     else if(_indicator=="bus"){
-        emit createBus();
+        emit createBus(place);
     }
     else if(_indicator=="gateway"){
-        emit createGateway();
+        emit createGateway(place);
     }
     else if(_indicator=="runway"){
-        emit createRunway();
+        emit createRunway(place);
     }
     else{
         std::cerr<<"Error: the programmer forget to add "<<_indicator<<"command to ConfigParser::emitSignal function"<<std::endl;

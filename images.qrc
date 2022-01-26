@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="airport.png">images/correct_airport_pop.png</file>
+        <file alias="plane.png">images/plane.png</file>
+    </qresource>
+</RCC>
