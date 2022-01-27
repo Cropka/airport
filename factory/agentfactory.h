@@ -10,7 +10,7 @@ class AgentFactory : public QObject
     Q_OBJECT
 public:
     explicit AgentFactory(QObject *parent = nullptr);
-    virtual Agent* createAgent() = 0;
+    virtual Agent* createAgent(int priority) = 0;
 signals:
 
 };

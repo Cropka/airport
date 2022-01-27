@@ -9,7 +9,7 @@ class BusFactory : public AgentFactory
     static int counter;
 public:
     explicit BusFactory(QObject *parent = nullptr);
-    virtual Bus* createAgent() override;
+    virtual Bus* createAgent(int priority=5) override;
 };
 
 #endif // BUSFACTORY_H

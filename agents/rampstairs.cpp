@@ -1,6 +1,6 @@
 #include "rampstairs.h"
 
-RampStairs::RampStairs(int _id, QObject *parent)
+RampStairs::RampStairs(int _id,  QObject *parent)
     : Car(_id, parent)
 {
 

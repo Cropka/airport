@@ -9,7 +9,7 @@ class PassengerPlaneFactory : public AgentFactory
     static int counter;
 public:
     explicit PassengerPlaneFactory(QObject *parent = nullptr);
-    virtual PassangerPlane* createAgent() override;
+    virtual PassangerPlane* createAgent(int priority) override;
 
 };
 

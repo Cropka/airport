@@ -6,10 +6,12 @@ PostalPlaneFactory::PostalPlaneFactory(QObject *parent)
 
 }
 
-PostalPlane *PostalPlaneFactory::createAgent()
+PostalPlane *PostalPlaneFactory::createAgent(int priority)
 {
-    std::cerr<<"New postal plane created!"<<std::endl;
-    return new PostalPlane(++counter);
+    std::cerr<<"New postal plane created (priority: "<<priority<<")"<<std::endl;
+    PostalPlane* newPlane = new PostalPlane(++counter);
+    newPlane->priority=priority;
+    return newPlane;
 }
 
 int PostalPlaneFactory::counter = 0;

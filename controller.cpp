@@ -10,7 +10,7 @@ Controller::Controller(Airport * _airport, QObject *parent)
 
 Controller::~Controller()
 {
-    while (!event_queue.empty()) event_queue.pop();
+    while (!agent_queue.empty()) agent_queue.pop_back();
 }
 
 int Controller::isResourceFree(std::string r_type)
@@ -35,16 +35,41 @@ void Controller::acknowledgeNewResource(Resource *)
 
 void Controller::landingRequested(Agent* agent)
 {
-    Event *event = new Event(0, 0, nullptr, nullptr, nullptr);
-    event_queue.push(*event);
+    //Event *event = new Event(0, 0, nullptr, nullptr, nullptr);
+    agent_queue.push_back(agent);
+    requeue();//setting the queue
     std::cerr << "Received event: Plane landing; plane type: " << agent->agent_type() << "; plane id: " << agent->id << std::endl;
     agent->setPos(467, 1000);
     airport->arrive_place_2(agent);
 }
 
+/*
 bool CompareEvents::operator()(Event e1, Event e2)
 {
     if (e1.timeOfOccuring < e2.timeOfOccuring)
         return true;
     return false;
 }
+*/
+
+//this function just goes through the queue and set it acknowledging the priority of the agents.
+void Controller::requeue(){
+    std::vector<Agent*> newQueue;
+    int currentPriority=0;//highest priority goes first
+    while(!agent_queue.empty()){
+        for (Agent* a : agent_queue){
+            if(a->priority==currentPriority){
+                newQueue.push_back(a);
+                agent_queue.erase(std::remove(agent_queue.begin(), agent_queue.end(), a), agent_queue.end());
+            }
+        }
+        currentPriority++;
+    }
+    agent_queue=newQueue;
+    for (Agent* a : agent_queue){//highering the priority of every plane that is still waiting by one.
+        if(a!=0){//but it couldn't go below 0.
+            a->priority--;
+        }
+    }
+}
+

@@ -27,21 +27,18 @@ bool ConfigParser::readObjects(std::string filename){
     while (std::getline(iStream, Line, ' ')){
         words.push_back(Line);
     }
-    bool found;
 
     for(unsigned int i=0;i<words.size();++i){
-        if(i%2==0){
-            found=false;
-            for(std::string keyword : keywords){
-                if(words[i]==keyword) {
-                    emitSignal(keyword, words[i+1]);
-                    found=true;
-                }
-            }
-            if(found==false){
-                  std::cerr<<"Config error: No such command: \""<<words[i]<<"\", file "<<filename<<std::endl;
-            }
-
+        if(keyword2arg(words[i])){//if command is a one that needs 2 args
+            emitSignal(words[i], words[i+1]);
+            i+=1;
+        }
+        else if(keyword3arg(words[i])){//if command is a one that needs 3 args
+            emitSignal(words[i], words[i+1], words[i+2]);
+            i+=2;
+        }
+        else{
+            i+=1;
         }
     }
     return true;
@@ -64,20 +61,21 @@ bool ConfigParser::preprocess(std::istringstream& _iStream, std::string _filenam
     return pclose(pProc) == 0;
 }
 
-void ConfigParser::emitSignal(std::string _indicator, std::string _place){
+void ConfigParser::emitSignal(std::string _indicator, std::string _place, std::string _priority){
     int place = std::stoi(_place);
+    int priority = std::stoi(_priority);
     //{"postalplane", "passengerplane", "rampstairs", "bus", "gateway", "runway"}
     if(_indicator=="postalplane"){
-        emit createPostalPlane(place);
+        emit createPostalPlane(place, priority);
     }
     else if(_indicator=="passengerplane"){
-        emit createPassangerPlane(place);
+        emit createPassangerPlane(place, priority);
     }
     else if(_indicator=="rampstairs"){
-        emit createRampstairs(place);
+        emit createRampstairs(place, priority);
     }
     else if(_indicator=="bus"){
-        emit createBus(place);
+        emit createBus(place, priority);
     }
     else if(_indicator=="gateway"){
         emit createGateway(place);
@@ -86,6 +84,24 @@ void ConfigParser::emitSignal(std::string _indicator, std::string _place){
         emit createRunway(place);
     }
     else{
-        std::cerr<<"Error: the programmer forget to add "<<_indicator<<"command to ConfigParser::emitSignal function"<<std::endl;
+        std::cerr<<"Error: the programmer forgot to add "<<_indicator<<"command to ConfigParser::emitSignal function"<<std::endl;
     }
+}
+
+bool ConfigParser::keyword2arg(std::string keyword){
+    for(std::string key : keywords2){
+        if(key==keyword){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ConfigParser::keyword3arg(std::string keyword){
+    for(std::string key : keywords3){
+        if(key==keyword){
+            return true;
+        }
+    }
+    return false;
 }

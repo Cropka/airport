@@ -6,7 +6,7 @@ RampStairsFactory::RampStairsFactory(QObject *parent)
 
 }
 
-RampStairs *RampStairsFactory::createAgent()
+RampStairs *RampStairsFactory::createAgent(int priority)
 {
     std::cerr<<"New rampstairs created!"<<std::endl;
     return new RampStairs(++counter);

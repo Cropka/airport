@@ -9,7 +9,7 @@ class PostalPlaneFactory : public AgentFactory
     static int counter;
 public:
     explicit PostalPlaneFactory(QObject *parent = nullptr);
-    virtual PostalPlane *createAgent() override;
+    virtual PostalPlane *createAgent(int priority) override;
 };
 
 #endif // POSTALPLANEFACTORY_H

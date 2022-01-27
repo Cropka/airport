@@ -35,14 +35,14 @@ void Simulator::readConfigFile(std::string filename){
     config->readObjects(filename);//should be changed! It should be taken from the user input!
 }
 
-void Simulator::addNewPassangerPlane(int place)
+void Simulator::addNewPassangerPlane(int place, int priority)
 {
-    airport->addAgent(passanger_plane_factory.createAgent(), place);
+    airport->addAgent(passanger_plane_factory.createAgent(priority), place);
 }
 
-void Simulator::addNewPostalPlane(int place)
+void Simulator::addNewPostalPlane(int place, int priority)
 {
-    airport->addAgent(postal_plane_factory.createAgent(), place);
+    airport->addAgent(postal_plane_factory.createAgent(priority), place);
 }
 
 void Simulator::addNewBus(int place)

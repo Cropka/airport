@@ -42,10 +42,10 @@ signals:
     void requestLanding(Agent*);
 
 public slots:
-    void readConfigFile(std::string);//the filename should be read from GUI. For now its hardcoded (but it should probably change).
+    void readConfigFile(std::string);
     void startSimulation();
-    void addNewPassangerPlane(int place);
-    void addNewPostalPlane(int place);
+    void addNewPassangerPlane(int place, int priority);
+    void addNewPostalPlane(int place, int priority);
     void addNewBus(int place);
     void addNewRampStairs(int place);
     void addNewGateway(int place);

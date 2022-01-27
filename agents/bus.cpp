@@ -1,7 +1,7 @@
 #include "bus.h"
 
 Bus::Bus(int _id, QObject *parent)
-    : Car(_id, parent)
+        : Car(_id, parent)
 {
 
 }

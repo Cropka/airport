@@ -13,6 +13,7 @@ protected:
     Q_OBJECT
 public:
     int id;
+    int priority=5;
     QPixmap image;
     explicit Agent(int _id, QObject *parent = nullptr);
     Agent(int _id, float pos_x, float pos_y, QObject *parent = nullptr);

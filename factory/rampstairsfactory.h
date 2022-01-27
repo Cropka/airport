@@ -9,7 +9,7 @@ class RampStairsFactory : public AgentFactory
     static int counter;
 public:
     explicit RampStairsFactory(QObject *parent = nullptr);
-    virtual RampStairs* createAgent() override;
+    virtual RampStairs* createAgent(int priority=5) override;
 };
 
 #endif // RAMPSTAIRSFACTORY_H
