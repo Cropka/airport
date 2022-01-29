@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <queue>
+#include <utility>//this is for std::pair
 #include "agent.h"
 #include "airport.h"
 #include "event.h"
@@ -21,12 +22,14 @@ class Controller : public QObject
 
     Airport *airport;
     //std::priority_queue<Event, std::vector<Event>, CompareEvents> event_queue;
-    std::vector<Agent*> agent_queue;
+    std::vector<std::pair<Agent*, std::string>> agent_queue;//agent and name of resource that it needs. Basically an operation.
     void requeue();
 public:
     explicit Controller(Airport *_airport, QObject *parent = nullptr);
     virtual ~Controller();
     int isResourceFree(std::string);
+    int runDoableEvents();//run all events that can be run
+    bool runFirstDoableEvent();//if no doable event with current resources, returns false. Otherwise -> true.
 public slots:
     void acknowledgeNewAgent(Agent*);
     void acknowledgeNewResource(Resource*);
