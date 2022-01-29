@@ -18,8 +18,6 @@
  * Used to generate the events with all parameters, including time of occuring.
  */
 
-//can be hardcoded at the beginning.
-
 class Simulator : public QObject
 {
     Q_OBJECT
@@ -40,7 +38,7 @@ public:
 
 signals:
     void requestLanding(Agent*);
-
+    void newFreedResource_sim();
 public slots:
     void readConfigFile(std::string);
     void startSimulation();
@@ -50,6 +48,7 @@ public slots:
     void addNewRampStairs(int place);
     void addNewGateway(int place);
     void addNewRunway(int place);
+    void newFreedResource();
 };
 
 #endif // SIMULATOR_H

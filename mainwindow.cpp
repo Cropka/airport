@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(start_sim, SIGNAL(clicked()), simulator, SLOT(startSimulation()));
     connect(read_config_button, SIGNAL(clicked()), this, SLOT(read_config()));
     connect(simulator, SIGNAL(requestLanding(Agent*)), controller, SLOT(landingRequested(Agent*)));
+    connect(simulator, SIGNAL(newFreedResource_sim()), controller, SLOT(newFreeResource()));
 }
 
 MainWindow::~MainWindow()

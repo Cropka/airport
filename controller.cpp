@@ -43,6 +43,10 @@ void Controller::landingRequested(Agent* agent)
     airport->arrive_place_2(agent);
 }
 
+void Controller::newFreeResource(){
+    //check if we can run something and run it if so
+}
+
 /*
 bool CompareEvents::operator()(Event e1, Event e2)
 {

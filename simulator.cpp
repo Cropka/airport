@@ -6,6 +6,9 @@ Simulator::Simulator(Airport *_airport, QObject *parent)
     airport = _airport;
     config=new ConfigParser(airport);
     connectParser();
+    for(Resource* r : airport->resources){
+        connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+    }
 }
 
 Simulator::~Simulator()
@@ -63,4 +66,8 @@ void Simulator::addNewGateway(int place)
 void Simulator::addNewRunway(int place)
 {
     airport->addResource(runway_factory.createResource(), place);
+}
+
+void Simulator::newFreedResource(){
+    emit(newFreedResource_sim());
 }
