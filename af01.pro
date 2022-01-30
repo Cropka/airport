@@ -25,6 +25,7 @@ SOURCES += main.cpp \
     agents/plane.cpp \
     agents/postalplane.cpp \
     agents/rampstairs.cpp \
+    animationtimer.cpp \
     factory/agentfactory.cpp \
     factory/busfactory.cpp \
     factory/gatewayfactory.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     agents/plane.h \
     agents/postalplane.h \
     agents/rampstairs.h \
+    animationtimer.h \
     factory/agentfactory.h \
     factory/busfactory.h \
     factory/gatewayfactory.h \

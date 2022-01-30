@@ -3,9 +3,7 @@
 
 /*block comments
   should also work!*/
- 
-passengerplane 1 3;
-postalplane 3 5;
+
 passengerplane 0 5;
 runway 0;
 runway 1;

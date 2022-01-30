@@ -43,8 +43,18 @@ void Controller::landingRequested(Agent* agent)
     requeue();//resetting the queue
     std::cerr << "Received event: Plane landing; plane type: " << agent->agent_type() << "; plane id: " << agent->id << std::endl;
 
-    agent->setPos(467, 1000);
-    airport->arrive_place_2(agent);
+    airport->arrive_place_4(agent);
+}
+
+void Controller::takeoffRequested(Agent* agent)
+{
+    std::pair<Agent*, std::string> operation;
+    operation.first=agent;
+    operation.second="runway";
+    agent_queue.push_back(operation);
+    requeue();
+
+    airport->takeoff_place_4(agent);
 }
 
 void Controller::newFreeResource(){

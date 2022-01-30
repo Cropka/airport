@@ -16,11 +16,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     start_sim = new QPushButton("Start Simulation", this);
     start_sim->setGeometry(1500, 300, 120, 40);
+    start_sim2 = new QPushButton("Start Simulation 2", this);
+    start_sim2->setGeometry(1500, 400, 120, 40);
     setCentralWidget(airport);
 
     connect(start_sim, SIGNAL(clicked()), simulator, SLOT(startSimulation()));
+    connect(start_sim2, SIGNAL(clicked()), simulator, SLOT(startSimulation2()));
     connect(read_config_button, SIGNAL(clicked()), this, SLOT(read_config()));
     connect(simulator, SIGNAL(requestLanding(Agent*)), controller, SLOT(landingRequested(Agent*)));
+    connect(simulator, SIGNAL(requestTakeoff(Agent*)), controller, SLOT(takeoffRequested(Agent*)));
     connect(simulator, SIGNAL(newFreedResource_sim()), controller, SLOT(newFreeResource()));
 }
 

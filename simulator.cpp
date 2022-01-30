@@ -25,6 +25,15 @@ void Simulator::startSimulation()
     }
 }
 
+void Simulator::startSimulation2()
+{
+    for (auto agent : airport->agents) {
+        if (agent->agent_type() == "postal plane" || agent->agent_type() == "passanger plane") {
+            emit requestTakeoff(agent);
+        }
+    }
+}
+
 void Simulator::connectParser(){
     QObject::connect(config, &ConfigParser::createPassangerPlane, this, &Simulator::addNewPassangerPlane);
     QObject::connect(config, &ConfigParser::createPostalPlane, this, &Simulator::addNewPostalPlane);

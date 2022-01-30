@@ -1,9 +1,10 @@
 #include "agent.h"
+#include <iostream>
 
 Agent::Agent(int _id, QObject *parent)
     : QObject(parent), QGraphicsItem(nullptr), id(_id)
 {
-
+    setTransformOriginPoint(image.rect().center());
 }
 
 Agent::Agent(int _id, float pos_x, float pos_y, QObject *parent)
@@ -14,7 +15,7 @@ Agent::Agent(int _id, float pos_x, float pos_y, QObject *parent)
 
 QRectF Agent::boundingRect() const
 {
-    return image.rect();
+    return image.rect(); // + QMarginsF(0.5 * image.rect().width(), 0.5 * image.rect().height(), 0.5 * image.rect().width(), 0.5 * image.rect().height());
 }
 
 void Agent::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget)

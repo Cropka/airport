@@ -38,10 +38,12 @@ public:
 
 signals:
     void requestLanding(Agent*);
+    void requestTakeoff(Agent*);
     void newFreedResource_sim();
 public slots:
     void readConfigFile(std::string);
     void startSimulation();
+    void startSimulation2();
     void addNewPassangerPlane(int place, int priority);
     void addNewPostalPlane(int place, int priority);
     void addNewBus(int place);

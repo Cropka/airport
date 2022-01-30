@@ -34,6 +34,7 @@ public slots:
     void acknowledgeNewAgent(Agent*);
     void acknowledgeNewResource(Resource*);
     void landingRequested(Agent*);
+    void takeoffRequested(Agent*);
     void newFreeResource();//this is activated, when any resource is freed. Then, controller could try to run some of the queued tasks(agents)
 };
 
