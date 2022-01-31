@@ -248,6 +248,7 @@ void Airport::addResource(Resource *resource, int place)
 void Airport::arrive_landing_runway(Agent *plane, int runway)
 {
     plane->resetTransform();
+    plane->rotation_tracker = 0;
     switch(runway) {
     case 1:
         plane->setPos(place_1_x, 1000);
@@ -269,6 +270,7 @@ void Airport::arrive_landing_runway(Agent *plane, int runway)
 void Airport::dock(Agent *plane, int place)
 {
     plane->resetTransform();
+    plane->rotation_tracker = 0;
     switch(place) {
     case 1:
         if(!(this->docking_1_clock->isActive()))
@@ -300,6 +302,7 @@ void Airport::dock(Agent *plane, int place)
 void Airport::takeoff(Agent *plane, int place)
 {
     plane->resetTransform();
+    plane->rotation_tracker = 0;
     switch(place) {
     case 1:
         if(!(this->takeoff_1_clock->isActive()))
@@ -441,15 +444,15 @@ void Airport::animate_docking_onto_the_spot_2(Agent *p)
     else if(p->pos().y() <= this->waypoint_y)
     {
 
-        if(this->plane_1_ang != 90 && p->pos().x() == this->place_1_x)
+        if(p->rotation_tracker != 90 && p->pos().x() == this->place_1_x)
         {
                 t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-                t.rotate(this->plane_1_ang + 1);
+                t.rotate(p->rotation_tracker + 1);
                 t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
                 p->setTransform(t);
-                this->plane_1_ang += 1;
+                p->rotation_tracker += 1;
         }
-        else if(this->plane_1_ang <= 90)
+        else if(p->rotation_tracker <= 90)
         {
 
             if(p->pos().x() < this->place_2_x)
@@ -459,16 +462,16 @@ void Airport::animate_docking_onto_the_spot_2(Agent *p)
             else if(p->pos().x() == this->place_2_x)
             {
 
-                if(this->plane_1_ang > 0)
+                if(p->rotation_tracker > 0)
                 {
                     t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-                    t.rotate(this->plane_1_ang - 1);
+                    t.rotate(p->rotation_tracker - 1);
                     t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
                     p->setTransform(t);
 
-                    this->plane_1_ang -= 1;
+                    p->rotation_tracker -= 1;
                 }
-                else if(this->plane_1_ang == 0)
+                else if(p->rotation_tracker == 0)
                 {
                     if(p->pos().y() > this->place_2_y)
                     {
@@ -686,13 +689,13 @@ void Airport::animate_takeoff_place_1(Agent *plane)
     QRectF plane_pic = plane->boundingRect();
     QTransform t;
 
-    if(plane->pos().y() == this->place_1_y && this->plane_1_ang != -180)
+    if(plane->pos().y() == this->place_1_y && plane->rotation_tracker != -180)
     {
         t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-        t.rotate(this->plane_1_ang - 1);
+        t.rotate(plane->rotation_tracker - 1);
         t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
         plane->setTransform(t);
-        this->plane_1_ang -= 1;
+        plane->rotation_tracker -= 1;
     }
     else
     {
@@ -700,15 +703,15 @@ void Airport::animate_takeoff_place_1(Agent *plane)
         {
             plane->setPos(plane->pos().x(), plane->pos().y() + 1);
         }
-        else if(plane->pos().y() == this->waypoint_y && this->plane_1_ang != -90)
+        else if(plane->pos().y() == this->waypoint_y && plane->rotation_tracker != -90)
         {
             t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-            t.rotate(this->plane_1_ang + 1);
+            t.rotate(plane->rotation_tracker + 1);
             t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
             plane->setTransform(t);
-            this->plane_1_ang += 1;
+            plane->rotation_tracker += 1;
         }
-        else if(this->plane_1_ang == -90)
+        else if(plane->rotation_tracker == -90)
         {
             if(plane->pos().x() != -100) {
                 plane->setPos(plane->pos().x() - 1, plane->pos().y());
@@ -729,16 +732,15 @@ void Airport::animate_takeoff_place_1(Agent *plane)
 void Airport::animate_takeoff_place_2(Agent *plane)
 {
     QRectF plane_pic = plane->boundingRect();
-    qDebug() << this->plane_1_ang;
 
-    if(plane->pos().y() == this->place_2_y && this->plane_1_ang != -180)
+    if(plane->pos().y() == this->place_2_y && plane->rotation_tracker != -180)
     {
         QTransform t1;
         t1.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-        t1.rotate(this->plane_1_ang - 1);
+        t1.rotate(plane->rotation_tracker - 1);
         t1.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
         plane->setTransform(t1);
-        this->plane_1_ang -= 1;
+        plane->rotation_tracker -= 1;
     }
     else
     {
@@ -746,16 +748,16 @@ void Airport::animate_takeoff_place_2(Agent *plane)
         {
             plane->setPos(plane->pos().x(), plane->pos().y() + 1);
         }
-        else if(plane->pos().y() == this->waypoint_y && this->plane_1_ang != -90)
+        else if(plane->pos().y() == this->waypoint_y && plane->rotation_tracker != -90)
         {
             QTransform t2;
             t2.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-            t2.rotate(this->plane_1_ang + 1);
+            t2.rotate(plane->rotation_tracker + 1);
             t2.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
             plane->setTransform(t2);
-            this->plane_1_ang += 1;
+            plane->rotation_tracker += 1;
         }
-        else if(this->plane_1_ang == -90)
+        else if(plane->rotation_tracker == -90)
         {
             if(plane->pos().x() != -100) {
                 plane->setPos(plane->pos().x() - 1, plane->pos().y());
@@ -778,13 +780,13 @@ void Airport::animate_takeoff_place_3(Agent *plane)
     QRectF plane_pic = plane->boundingRect();
     QTransform t;
 
-    if(plane->pos().y() == this->place_3_y && this->plane_1_ang != -180)
+    if(plane->pos().y() == this->place_3_y && plane->rotation_tracker != -180)
     {
         t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-        t.rotate(this->plane_1_ang - 1);
+        t.rotate(plane->rotation_tracker - 1);
         t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
         plane->setTransform(t);
-        this->plane_1_ang -= 1;
+        plane->rotation_tracker -= 1;
     }
     else
     {
@@ -792,15 +794,15 @@ void Airport::animate_takeoff_place_3(Agent *plane)
         {
             plane->setPos(plane->pos().x(), plane->pos().y() + 1);
         }
-        else if(plane->pos().y() == this->waypoint_y && this->plane_1_ang != -90)
+        else if(plane->pos().y() == this->waypoint_y && plane->rotation_tracker != -90)
         {
             t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-            t.rotate(this->plane_1_ang + 1);
+            t.rotate(plane->rotation_tracker + 1);
             t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
             plane->setTransform(t);
-            this->plane_1_ang += 1;
+            plane->rotation_tracker += 1;
         }
-        else if(this->plane_1_ang == -90)
+        else if(plane->rotation_tracker == -90)
         {
             if(plane->pos().x() != -100) {
                 plane->setPos(plane->pos().x() - 1, plane->pos().y());
@@ -829,13 +831,13 @@ void Airport::animate_takeoff_place_4(Agent *plane)
     QRectF plane_pic = plane->boundingRect();
     QTransform t;
 
-    if(plane->pos().y() == this->place_4_y && this->plane_1_ang != -180)
+    if(plane->pos().y() == this->place_4_y && plane->rotation_tracker != -180)
     {
         t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-        t.rotate(this->plane_1_ang - 1);
+        t.rotate(plane->rotation_tracker - 1);
         t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
         plane->setTransform(t);
-        this->plane_1_ang -= 1;
+        plane->rotation_tracker -= 1;
     }
     else
     {
@@ -843,15 +845,15 @@ void Airport::animate_takeoff_place_4(Agent *plane)
         {
             plane->setPos(plane->pos().x(), plane->pos().y() + 1);
         }
-        else if(plane->pos().y() == this->waypoint_y && this->plane_1_ang != -90)
+        else if(plane->pos().y() == this->waypoint_y && plane->rotation_tracker != -90)
         {
             t.translate((plane_pic.width()*0.025)/2, (plane_pic.height()*0.025)/2);
-            t.rotate(this->plane_1_ang + 1);
+            t.rotate(plane->rotation_tracker + 1);
             t.translate(-((plane_pic.width()*0.025)/2), -((plane_pic.height()*0.025)/2));
             plane->setTransform(t);
-            this->plane_1_ang += 1;
+            plane->rotation_tracker += 1;
         }
-        else if(this->plane_1_ang == -90)
+        else if(plane->rotation_tracker == -90)
         {
             if(plane->pos().x() != -100) {
                 plane->setPos(plane->pos().x() - 1, plane->pos().y());

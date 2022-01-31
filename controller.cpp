@@ -157,6 +157,7 @@ bool CompareEvents::operator()(Event e1, Event e2)
 
 //this function just goes through the queue and set it acknowledging the priority of the agents.
 void Controller::requeue(){
+//    event_queue_mutex.lock();
     std::vector<Event*> newQueue;
     int currentPriority=0;//highest priority goes first
     while(!event_queue.empty()){
@@ -174,6 +175,7 @@ void Controller::requeue(){
             event->priority--;
         }
     }
+    event_queue_mutex.unlock();
 }
 
 void Controller::runEvent(Event *event, std::vector<Resource *> resources)
@@ -212,15 +214,15 @@ void Controller::runEvent(Event *event, std::vector<Resource *> resources)
 //that function finds first event from the queue, which can be performed with the available resources.
 //it's returning int, because it cannot just return agent*, as it may result in non finding one which is possible to perform.
 bool Controller::runFirstDoableEvent(){
-    event_queue_mutex.lock();
+//    event_queue_mutex.lock();
 //    std::cerr << "event queue sizze: " << event_queue.size() << std::endl;
 //    if (event_queue.size() > 0) {
 //        std::cerr << "event 1 type = " << event_queue[0]->type << std::endl;
 //    }
-//    if (event_queue.size() == 2) {
+//    if (event_queue.size() > 1) {
 //        std::cerr << "event 2 type = " << event_queue[0]->type << std::endl;
 //    }
-    airport->debugResources();
+//    airport->debugResources();
     for (Event* event : event_queue){
         std::vector<Resource*> resources_needed;
         if (AreResourcesFree(event->resources, resources_needed)){

@@ -21,7 +21,7 @@ Simulator::~Simulator()
 
 void Simulator::startSimulation()
 {
-    event_generator->start(1000);
+    event_generator->start(6000);
 }
 
 void Simulator::stopSimulation()
