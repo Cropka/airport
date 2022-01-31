@@ -4,6 +4,19 @@
 /*block comments
   should also work!*/
 
+landingrunway 1;
+landingrunway 2;
+takeoffrunway 1;
+takeoffrunway 2;
+landingspot 1;
+landingspot 2;
+landingspot 3;
+landingspot 4;
 passengerplane 0 5;
-runway 0;
-runway 1;
+passengerplane 0 3;
+passengerplane 0 4;
+passengerplane 3 4;
+passengerplane 0 6;
+passengerplane 1 5;
+passengerplane 0 7;
+passengerplane 0 5;

@@ -15,6 +15,7 @@ public:
     int id;
     int priority=5;
     int rotation_tracker = 0;
+    std::string state;
     QPixmap image;
     explicit Agent(int _id, QObject *parent = nullptr);
     Agent(int _id, float pos_x, float pos_y, QObject *parent = nullptr);

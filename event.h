@@ -2,22 +2,20 @@
 #define EVENT_H
 
 #include <vector>
+#include <utility>
 #include "resource.h"
 #include "agent.h"
+
+using ResourceBundle = std::vector<std::pair<std::string, std::vector<int>>>;
 
 class Event
 {
 public:
-    explicit Event(int _timeOfOccuring, int _priority, std::vector<Agent>* _agents, std::vector<Resource>* _resources,
-                   std::vector<Event>* _subevents);
-    Event(const Event&);
-    Event(Event&&);
-    Event& operator=(Event&&);
-    int timeOfOccuring;
+    explicit Event(Agent* _agent, ResourceBundle _resources, std::string _type);
     int priority;
-    std::vector<Resource> *resources;
-    std::vector<Agent> *agents; //event may initialise some agents, that need to be displayed on a GUI
-    std::vector<Event> *subevents;
+    ResourceBundle resources;
+    std::string type;
+    Agent *agent; //event may initialise some agents, that need to be displayed on a GUI
 };
 
 #endif // EVENT_H

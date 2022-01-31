@@ -80,8 +80,14 @@ void ConfigParser::emitSignal(std::string _indicator, std::string _place, std::s
     else if(_indicator=="gateway"){
         emit createGateway(place);
     }
-    else if(_indicator=="runway"){
-        emit createRunway(place);
+    else if(_indicator=="landingrunway"){
+        emit createLandingRunway(place);
+    }
+    else if(_indicator=="takeoffrunway"){
+        emit createTakeoffRunway(place);
+    }
+    else if(_indicator=="landingspot"){
+        emit createLandingSpot(place);
     }
     else{
         std::cerr<<"Error: the programmer forgot to add "<<_indicator<<"command to ConfigParser::emitSignal function"<<std::endl;

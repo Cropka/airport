@@ -29,7 +29,7 @@ class ConfigParser : public QObject
     Q_OBJECT
 public:
     Airport *airport;
-    std::vector<std::string> keywords2={"rampstairs", "bus", "gateway", "runway"}; //definitions of commands (which need two args) in the config file
+    std::vector<std::string> keywords2={"rampstairs", "bus", "gateway", "landingrunway", "takeoffrunway", "landingspot"}; //definitions of commands (which need two args) in the config file
     std::vector<std::string> keywords3={"postalplane", "passengerplane"}; //definitions of commands (which need three args) in the config file
     bool keyword2arg(std::string keyword);
     bool keyword3arg(std::string keyword);
@@ -43,7 +43,9 @@ signals:
     void createRampstairs(int, int);
     void createBus(int, int);
     void createGateway(int);
-    void createRunway(int);
+    void createLandingRunway(int);
+    void createTakeoffRunway(int);
+    void createLandingSpot(int);
 };
 
 #endif // CONFIGPARSER_H

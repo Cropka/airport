@@ -29,17 +29,21 @@ SOURCES += main.cpp \
     factory/agentfactory.cpp \
     factory/busfactory.cpp \
     factory/gatewayfactory.cpp \
+    factory/landingrunwayfactory.cpp \
+    factory/landingspotfactory.cpp \
     factory/passengerplanefactory.cpp \
     factory/postalplanefactory.cpp \
     factory/rampstairsfactory.cpp \
     factory/resourcefactory.cpp \
-    factory/runwayfactory.cpp \
+    factory/takeoffrunwayfactory.cpp \
     mainwindow.cpp \
     controller.cpp \
     event.cpp \
     resources/gateway.cpp \
+    resources/landingrunway.cpp \
+    resources/landingspot.cpp \
     resources/resource.cpp \
-    resources/runway.cpp \
+    resources/takeoffrunway.cpp \
     simulator.cpp \
     airport.cpp \
     configparser.cpp
@@ -56,17 +60,21 @@ HEADERS += \
     factory/agentfactory.h \
     factory/busfactory.h \
     factory/gatewayfactory.h \
+    factory/landingrunwayfactory.h \
+    factory/landingspotfactory.h \
     factory/passengerplanefactory.h \
     factory/postalplanefactory.h \
     factory/rampstairsfactory.h \
     factory/resourcefactory.h \
-    factory/runwayfactory.h \
+    factory/takeoffrunwayfactory.h \
     mainwindow.h \
     controller.h \
     event.h \
     resources/gateway.h \
+    resources/landingrunway.h \
+    resources/landingspot.h \
     resources/resource.h \
-    resources/runway.h \
+    resources/takeoffrunway.h \
     simulator.h \
     airport.h \
     configparser.h

@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
     QPushButton* read_config_button;
     QFileDialog* get_filename_dialog;
     QPushButton* start_sim;
-    QPushButton* start_sim2;
+    QPushButton* stop_sim;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

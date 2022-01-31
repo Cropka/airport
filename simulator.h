@@ -2,6 +2,7 @@
 #define SIMULATOR_H
 
 #include <QObject>
+#include <QTimer>
 #include "postalplane.h"
 #include "passangerplane.h"
 #include "airport.h"
@@ -10,7 +11,9 @@
 #include "busfactory.h"
 #include "rampstairsfactory.h"
 #include "gatewayfactory.h"
-#include "runwayfactory.h"
+#include "landingrunwayfactory.h"
+#include "landingspotfactory.h"
+#include "takeoffrunwayfactory.h"
 #include "configparser.h"
 
 /**
@@ -29,7 +32,10 @@ class Simulator : public QObject
     BusFactory bus_factory;
     RampStairsFactory ramp_stairs_factory;
     GatewayFactory gateway_factory;
-    RunwayFactory runway_factory;
+    LandingRunwayFactory landing_runway_factory;
+    LandingSpotFactory landing_spot_factory;
+    TakeoffRunwayFactory takeoff_runway_factory;
+    QTimer* event_generator;
     void connectParser();//just some signals-slots connection definitions
 
 public:
@@ -43,14 +49,18 @@ signals:
 public slots:
     void readConfigFile(std::string);
     void startSimulation();
-    void startSimulation2();
+    void stopSimulation();
     void addNewPassangerPlane(int place, int priority);
     void addNewPostalPlane(int place, int priority);
     void addNewBus(int place);
     void addNewRampStairs(int place);
     void addNewGateway(int place);
-    void addNewRunway(int place);
+    void addNewLandingRunway(int place);
+    void addNewTakeoffRunway(int place);
+    void addNewLandingSpot(int place);
     void newFreedResource();
+private slots:
+    void generateEvent();
 };
 
 #endif // SIMULATOR_H

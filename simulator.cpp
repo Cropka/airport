@@ -1,4 +1,5 @@
 #include "simulator.h"
+#include <random>
 
 Simulator::Simulator(Airport *_airport, QObject *parent)
     : QObject(parent)
@@ -6,32 +7,26 @@ Simulator::Simulator(Airport *_airport, QObject *parent)
     airport = _airport;
     config=new ConfigParser(airport);
     connectParser();
-    for(Resource* r : airport->resources){
-        connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
-    }
+    event_generator = new QTimer(this);
+    QObject::connect(event_generator, &QTimer::timeout, this, &Simulator::generateEvent);
+//    for(Resource* r : airport->resources){
+//        connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+//    }
 }
 
 Simulator::~Simulator()
 {
-
+    delete config;
 }
 
 void Simulator::startSimulation()
 {
-    for (auto agent : airport->agents) {
-        if (agent->agent_type() == "postal plane" || agent->agent_type() == "passanger plane") {
-            emit requestLanding(agent);
-        }
-    }
+    event_generator->start(1000);
 }
 
-void Simulator::startSimulation2()
+void Simulator::stopSimulation()
 {
-    for (auto agent : airport->agents) {
-        if (agent->agent_type() == "postal plane" || agent->agent_type() == "passanger plane") {
-            emit requestTakeoff(agent);
-        }
-    }
+    event_generator->stop();
 }
 
 void Simulator::connectParser(){
@@ -40,7 +35,9 @@ void Simulator::connectParser(){
     QObject::connect(config, &ConfigParser::createBus, this, &Simulator::addNewBus);
     QObject::connect(config, &ConfigParser::createRampstairs, this, &Simulator::addNewRampStairs);
     QObject::connect(config, &ConfigParser::createGateway, this, &Simulator::addNewGateway);
-    QObject::connect(config, &ConfigParser::createRunway, this, &Simulator::addNewRunway);
+    QObject::connect(config, &ConfigParser::createLandingRunway, this, &Simulator::addNewLandingRunway);
+    QObject::connect(config, &ConfigParser::createLandingSpot, this, &Simulator::addNewLandingSpot);
+    QObject::connect(config, &ConfigParser::createTakeoffRunway, this, &Simulator::addNewTakeoffRunway);
 }
 
 void Simulator::readConfigFile(std::string filename){
@@ -69,14 +66,50 @@ void Simulator::addNewRampStairs(int place)
 
 void Simulator::addNewGateway(int place)
 {
-    airport->addResource(gateway_factory.createResource(), place);
+    Resource* r = gateway_factory.createResource();
+    connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+    airport->addResource(r, place);
 }
 
-void Simulator::addNewRunway(int place)
+void Simulator::addNewLandingRunway(int place)
 {
-    airport->addResource(runway_factory.createResource(), place);
+    Resource* r = landing_runway_factory.createResource();
+    connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+    airport->addResource(r, place);
+}
+
+void Simulator::addNewTakeoffRunway(int place)
+{
+    Resource* r = takeoff_runway_factory.createResource();
+    connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+    airport->addResource(r, place);
+}
+
+void Simulator::addNewLandingSpot(int place)
+{
+    Resource* r = landing_spot_factory.createResource();
+    connect(r, SIGNAL(freed), this, SLOT(newFreedResource));
+    airport->addResource(r, place);
 }
 
 void Simulator::newFreedResource(){
-    emit(newFreedResource_sim());
+    emit newFreedResource_sim();
+}
+
+void Simulator::generateEvent()
+{
+    int size = airport->agents.size();
+    int agent_choice = std::rand() % size;
+    Agent* agent = airport->agents[agent_choice];
+    if (agent->state == "in air") {
+//        std::cerr << "agent ins state: " << agent->state << std::endl;
+        agent->state = "scheduled";
+        emit requestLanding(agent);
+    } else if (agent->state == "landed") {
+//        std::cerr << "agent ins state: " << agent->state << std::endl;
+        agent->state = "scheduled";
+        emit requestTakeoff(agent);
+    } else {
+//        std::cerr << "DUPPPA state: " << agent->state << std::endl;
+    }
 }

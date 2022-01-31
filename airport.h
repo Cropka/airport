@@ -57,6 +57,10 @@ public:
     int waypoint_4_x;
     int plane_4_ang;
 
+    int landing_runway_stop_y;
+    int takeoff_runway_1_border_x;
+    int takeoff_runway_2_border_x;
+
     AnimationTimer *clock1;
     AnimationTimer *clock2;
     AnimationTimer *clock3;
@@ -66,41 +70,70 @@ public:
     AnimationTimer *clock7;
     AnimationTimer *clock8;
 
+    AnimationTimer *landing_runway_1_clock;
+    AnimationTimer *landing_runway_2_clock;
+
+    AnimationTimer *docking_1_clock;
+    AnimationTimer *docking_2_clock;
+    AnimationTimer *docking_3_clock;
+    AnimationTimer *docking_4_clock;
+
+    AnimationTimer *takeoff_1_clock;
+    AnimationTimer *takeoff_2_clock;
+    AnimationTimer *takeoff_3_clock;
+    AnimationTimer *takeoff_4_clock;
+    AnimationTimer *resereve_takeoff_clock;
+
 
     explicit Airport(QWidget *parent = nullptr);
     ~Airport();
+    int determine_spot(Agent *agent);
+    void debugResources();
 signals:
     void notifyNewAgentAdded(Agent*);
     void notifyNewResourceAdded(Resource*);
+    void requestDocking(Agent*, int);
+    void docked(Agent*, int);
+    void takeoffFinished(Agent*);
 
 public slots:
     void addAgent(Agent*, int);
     void addResource(Resource*, int);
 
     //Arriving the first 2 places by frist runway
-    void animate_arrive_place_1(Agent*);
-    void animate_arrive_place_2(Agent*);
-    //Arriving the 3,4 places by second runway
-    void animate_arrive_place_3(Agent*);
-    void animate_arrive_place_4(Agent*);
+//    void animate_arrive_place_1(Agent*);
+//    void animate_arrive_place_2(Agent*);
+//    //Arriving the 3,4 places by second runway
+//    void animate_arrive_place_3(Agent*);
+//    void animate_arrive_place_4(Agent*);
 
-    void animate_takeoff_place_1(Agent*);
-    void animate_takeoff_place_2(Agent*);
-    void animate_takeoff_place_3(Agent*);
-    void animate_takeoff_place_4(Agent*);
+//    void arrive_place_1(Agent*);
+//    void arrive_place_2(Agent*);
+//    void arrive_place_3(Agent*);
+//    void arrive_place_4(Agent*);
+//    void takeoff_place_1(Agent*);
+//    void takeoff_place_2(Agent*);
+//    void takeoff_place_3(Agent*);
+//    void takeoff_place_4(Agent*);
 
-    void arrive_place_1(Agent*);
-    void arrive_place_2(Agent*);
-    void arrive_place_3(Agent*);
-    void arrive_place_4(Agent*);
-    void takeoff_place_1(Agent*);
-    void takeoff_place_2(Agent*);
-    void takeoff_place_3(Agent*);
-    void takeoff_place_4(Agent*);
+    void arrive_landing_runway(Agent*, int);
+    void dock(Agent*, int);
+    void takeoff(Agent*, int);
 
 private:
     int get_place_x(int) const;
     int get_place_y(int) const;
+private slots:
+    void animate_landing_runway_1(Agent*);
+    void animate_landing_runway_2(Agent*);
+    void animate_docking_onto_the_spot_1(Agent*);
+    void animate_docking_onto_the_spot_2(Agent*);
+    void animate_docking_onto_the_spot_3(Agent*);
+    void animate_docking_onto_the_spot_4(Agent*);
+    void animate_takeoff_place_1(Agent*);
+    void animate_takeoff_place_2(Agent*);
+    void animate_takeoff_place_3(Agent*);
+    void animate_takeoff_place_4(Agent*);
 };
 
 #endif // AIRPORT_H

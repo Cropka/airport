@@ -16,7 +16,7 @@ public:
     void markTaken(){ busy=true; }
     void markFree(){
         busy=false;
-        emit(freed());
+        emit freed();
     }
     explicit Resource(int _id, QObject *parent = nullptr);
     Resource(int _id, float pos_x, float pos_y, QObject *parent = nullptr);
